@@ -209,10 +209,34 @@ namespace MidiFeeder
             else
             {
                 var pressed = value > 0;
-                if (pressed)
-                    _state.Buttons |= (uint)(1 << joystickControl.ButtonNumber);
-                else
-                    _state.Buttons &= ~(uint)(1 << joystickControl.ButtonNumber);
+                switch (joystickControl.ButtonNumber / 32) {
+                    case 0:
+                        if (pressed)
+                            _state.Buttons |= (uint)(1 << (joystickControl.ButtonNumber % 32));
+                        else
+                            _state.Buttons &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
+                        break;
+                    case 1:
+                        if (pressed)
+                            _state.ButtonsEx1 |= (uint)(1 << (joystickControl.ButtonNumber % 32));
+                        else
+                            _state.ButtonsEx1 &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
+                        break;
+                    case 2:
+                        if (pressed)
+                            _state.ButtonsEx2 |= (uint)(1 << (joystickControl.ButtonNumber % 32));
+                        else
+                            _state.ButtonsEx2 &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
+                        break;
+                    case 3:
+                        if (pressed)
+                            _state.ButtonsEx3 |= (uint)(1 << (joystickControl.ButtonNumber % 32));
+                        else
+                            _state.ButtonsEx3 &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
