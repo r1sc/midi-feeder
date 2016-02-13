@@ -209,33 +209,33 @@ namespace MidiFeeder
             else
             {
                 var pressed = value > 0;
-                switch (joystickControl.ButtonNumber / 32) {
-                    case 0:
+                switch (joystickControl.ButtonNumber / 32) {    //Each button bank in vJoy supports 32 buttons, so divide the button number by 32 to figure out which bank it is
+                    case 0:     //Original bank, Buttons
                         if (pressed)
                             _state.Buttons |= (uint)(1 << (joystickControl.ButtonNumber % 32));
                         else
                             _state.Buttons &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
                         break;
-                    case 1:
+                    case 1:     //First extended bank, ButtonsEx1
                         if (pressed)
                             _state.ButtonsEx1 |= (uint)(1 << (joystickControl.ButtonNumber % 32));
                         else
                             _state.ButtonsEx1 &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
                         break;
-                    case 2:
+                    case 2:     //Second extended bank, ButtonsEx2
                         if (pressed)
                             _state.ButtonsEx2 |= (uint)(1 << (joystickControl.ButtonNumber % 32));
                         else
                             _state.ButtonsEx2 &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
                         break;
-                    case 3:
+                    case 3:     //Third extended bank, ButtonsEx3
                         if (pressed)
                             _state.ButtonsEx3 |= (uint)(1 << (joystickControl.ButtonNumber % 32));
                         else
                             _state.ButtonsEx3 &= ~(uint)(1 << (joystickControl.ButtonNumber % 32));
                         break;
                     default:
-                        break;
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
