@@ -117,6 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Activate a MIDI controller to map it to a joystick function.
+
+Simply press/twist a button or axis on your MIDI controller and choose wether it should map to a button or an axis on the virtual joystick.
+
+vJoy MIDI Mapper must be running in order to preserve the mapping. The application will minimize to the system tray.</value>
+  </data>
   <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

@@ -134,12 +134,12 @@ namespace MidiFeeder
                 {
                     radioTypeButton.Checked = joystickControl.IsButton;
                     radioTypeAxis.Checked = !joystickControl.IsButton;
-                    button1.Enabled = true;
+                    btnUnmap.Enabled = true;
                 }
                 else
                 {
                     radioTypeAxis.Checked = radioTypeButton.Checked = false;
-                    button1.Enabled = false;
+                    btnUnmap.Enabled = false;
                 }
             }
             progessMidiData.Value = (value+1);
@@ -240,20 +240,28 @@ namespace MidiFeeder
             }
         }
 
-        private void radioTypeButton_CheckedChanged(object sender, EventArgs e)
+        private JoystickControl GetCurrentMapping()
         {
             var currentMapping = _joystickControls.SingleOrDefault(x => x.Mapping != null && (x.Mapping.DeviceId == _currentDeviceId && x.Mapping.ControlNumber == _currentControlId));
-            if (!radioTypeButton.Checked)
-                return;
-            var unmapped = _joystickControls.FirstOrDefault(x => x.IsButton && x.Mapping == null);
-            
-            if (currentMapping == null || currentMapping.IsButton == false)
+            return currentMapping;
+        }
+
+        private void Map(bool button)
+        {
+            var currentMapping = GetCurrentMapping();
+            if (currentMapping == null || currentMapping.IsButton == !button)
             {
                 if (currentMapping != null)
                     currentMapping.Mapping = null;
+
+                var unmapped = _joystickControls.FirstOrDefault(x => x.IsButton == button && x.Mapping == null);
                 if (unmapped == null)
                 {
-                    MessageBox.Show("There are no unmapped buttons left. Unmap another button in order to map this control.");
+                    string errorString = "There are no unmapped axes left. Unmap another axis in order to map this control.";
+                    if (button)
+                        errorString = "There are no unmapped buttons left. Unmap another button in order to map this control.";
+
+                    MessageBox.Show(errorString);
                 }
                 else
                 {
@@ -262,35 +270,36 @@ namespace MidiFeeder
                         ControlNumber = _currentControlId,
                         DeviceId = _currentDeviceId
                     };
+                    btnUnmap.Enabled = true;
                 }
             }
-            
+        }
+
+        private void radioTypeButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!radioTypeButton.Checked)
+                return;
+
+            Map(true);            
+        }
+
+        private void btnUnmap_Click(object sender, EventArgs e)
+        {
+            var currentMapping = GetCurrentMapping();
+            if (currentMapping == null)
+                return;
+            currentMapping.Mapping = null;
+
+            radioTypeAxis.Checked = radioTypeButton.Checked = false;
+            btnUnmap.Enabled = false;
         }
 
         private void radioTypeAxis_CheckedChanged(object sender, EventArgs e)
         {
-            var currentMapping = _joystickControls.SingleOrDefault(x => x.Mapping != null && (x.Mapping.DeviceId == _currentDeviceId && x.Mapping.ControlNumber == _currentControlId));
             if (!radioTypeAxis.Checked)
                 return;
-            var unmapped = _joystickControls.FirstOrDefault(x => x.IsButton == false && x.Mapping == null);
-            
-            if (currentMapping == null ||  currentMapping.IsButton)
-            {
-                if(currentMapping != null)
-                    currentMapping.Mapping = null;
-                if (unmapped == null)
-                {
-                    MessageBox.Show("There are no unmapped axes left. Unmap another axis in order to map this control.");
-                }
-                else
-                {
-                    unmapped.Mapping = new Mapping
-                    {
-                        ControlNumber = _currentControlId,
-                        DeviceId = _currentDeviceId
-                    };
-                }
-            }
+
+            Map(false);
         }
     }
 

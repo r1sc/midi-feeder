@@ -46,7 +46,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="vJoyInterfaceWrap">
-      <HintPath>..\..\Users\Erik\Desktop\SDK\c#\x86\vJoyInterfaceWrap.dll</HintPath>
+      <HintPath>C:\Program Files\vJoy\x86\vJoyInterfaceWrap.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

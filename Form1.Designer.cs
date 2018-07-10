@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.radioTypeAxis = new System.Windows.Forms.RadioButton();
             this.radioTypeButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,12 +38,13 @@
             this.lblMidiControlNumber = new System.Windows.Forms.Label();
             this.lblMidiDevice = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.btnUnmap = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnUnmap);
             this.groupBox3.Controls.Add(this.radioTypeAxis);
             this.groupBox3.Controls.Add(this.radioTypeButton);
             this.groupBox3.Controls.Add(this.label1);
@@ -53,24 +53,14 @@
             this.groupBox3.Controls.Add(this.lblMidiDevice);
             this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(323, 250);
+            this.groupBox3.Size = new System.Drawing.Size(357, 335);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(6, 209);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(308, 30);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Remap";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // radioTypeAxis
             // 
             this.radioTypeAxis.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioTypeAxis.Location = new System.Drawing.Point(176, 145);
+            this.radioTypeAxis.Location = new System.Drawing.Point(211, 227);
             this.radioTypeAxis.Name = "radioTypeAxis";
             this.radioTypeAxis.Size = new System.Drawing.Size(138, 58);
             this.radioTypeAxis.TabIndex = 18;
@@ -82,7 +72,7 @@
             // radioTypeButton
             // 
             this.radioTypeButton.Appearance = System.Windows.Forms.Appearance.Button;
-            this.radioTypeButton.Location = new System.Drawing.Point(6, 145);
+            this.radioTypeButton.Location = new System.Drawing.Point(6, 227);
             this.radioTypeButton.Name = "radioTypeButton";
             this.radioTypeButton.Size = new System.Drawing.Size(138, 58);
             this.radioTypeButton.TabIndex = 17;
@@ -95,9 +85,9 @@
             // 
             this.label1.Location = new System.Drawing.Point(6, 103);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(308, 13);
+            this.label1.Size = new System.Drawing.Size(343, 121);
             this.label1.TabIndex = 16;
-            this.label1.Text = "Activate a MIDI controller to map it to a joystick function";
+            this.label1.Text = resources.GetString("label1.Text");
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // progessMidiData
@@ -105,7 +95,7 @@
             this.progessMidiData.Location = new System.Drawing.Point(6, 63);
             this.progessMidiData.Maximum = 128;
             this.progessMidiData.Name = "progessMidiData";
-            this.progessMidiData.Size = new System.Drawing.Size(308, 19);
+            this.progessMidiData.Size = new System.Drawing.Size(343, 19);
             this.progessMidiData.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progessMidiData.TabIndex = 11;
             // 
@@ -135,11 +125,22 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // btnUnmap
+            // 
+            this.btnUnmap.Enabled = false;
+            this.btnUnmap.Location = new System.Drawing.Point(6, 291);
+            this.btnUnmap.Name = "btnUnmap";
+            this.btnUnmap.Size = new System.Drawing.Size(343, 34);
+            this.btnUnmap.TabIndex = 19;
+            this.btnUnmap.Text = "Unmap";
+            this.btnUnmap.UseVisualStyleBackColor = true;
+            this.btnUnmap.Click += new System.EventHandler(this.btnUnmap_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(335, 264);
+            this.ClientSize = new System.Drawing.Size(367, 350);
             this.Controls.Add(this.groupBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -161,10 +162,9 @@
         private System.Windows.Forms.ProgressBar progessMidiData;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RadioButton radioTypeAxis;
         private System.Windows.Forms.RadioButton radioTypeButton;
-
+        private System.Windows.Forms.Button btnUnmap;
     }
 }
 
